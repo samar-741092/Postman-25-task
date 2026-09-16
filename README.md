@@ -109,3 +109,10 @@ pip install torch matplotlib
 ```
 
 An NVIDIA GPU with CUDA support is recommended for running memory and wall-clock benchmarks.
+
+
+Challenges Encountered:
+testing unmasked dense attention with sparse attention and got fail in all 3 cases in 1.3, changed it to causal dense attention.
+benchmarking unmasked dense attention and sparse attention gave interesting results, with dense attention having faster execution time, but same memory, 
+conversely to what was shown in causal dense attention and sparse masked dense attention
+while hyperparameter tuning, just increasing the nembd layers, learning rate and decreasing the number of iterations gave highly overfitted results, with training errors much lower but higher validation error.
