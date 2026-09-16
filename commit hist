@@ -1,0 +1,17 @@
+# Commit History: Postmann_task_(1) (1).ipynb
+
+* **feat: implement manual dense attention**
+  implemented manual dense attention using matmul , softmax and mask as parameter using gemini for code, tested it with causal masking using trilower function.
+* **feat: add sliding window and BigBird sparsity masks**
+  Implemented sliding window and bigbird with local, global, and random token connections using gemini to generate code.
+* **test: create correctness harness for sparse vs dense attention**
+  Adds `test_sparse_vs_dense_correctness` to verify active unmasked elements match within float tolerance, made a mistake of testing unmasked dense attention with sparse attention and got fail in all 3 cases, changed it to causal dense attention. Used Gemini for initial Code generation
+* **fix: handle NaN probabilities in dense attention**
+  Implemented NaN probabilities in dense attention to replace NaN probabilities values to 0 using nan_to_num function
+* **perf: add CUDA memory and wall-clock benchmarking**
+  Used Gemini for initial code generation. Adds `benchmark_attention` script to compare forward pass latency and peak GPU memory between causal dense and sparse-masked attention, including matplotlib plotting. Here too did the mistake of using unmasked dense attention vs sparse masked dense attention and got a graph with dense attention being faster in execution time aswell, corrected the dense function to use causal mask using tril
+* **feat: implement 2-layer char-GPT for TinyShakespeare evaluation**
+  Adds Task 1.6 training loop comparing dense, sliding, and bigbird attention types over 5000 iterations, modified hyperparameters, increasing the nembd layers, turning on dropout, increasing the learning rate, and decreasing the max_iters. used Gemini for generating code
+
+* **chore: tune GPT hyperparameters for improved validation loss**
+  Updates the training script to use `n_embd = 256`, `dropout = 0.2`, `learning_rate = 1e-3`, and `max_iters = 2500`.
